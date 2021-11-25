@@ -8,15 +8,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>dev.classes$</title>
 
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-   
-
-    
+    <header>
+      <h1>dev.Classes</h1>
+    </header>
+    <main class="container">
+      <div id="search-box">
+        <div class="input-group">
+          <label class="sr-only" for="search">Buscar um curso por id</label>
+          <input
+            type="search"
+            placeholder="Buscar ID"
+            name="search"
+            id="search"
+          />
+          <button>
+            <i class="fas fa-search fa-2x"></i>
+          </button>
+        </div>
+      </div>
+      <section id="table">
+        <h2 class="sr-only">Tabela de Cursos</h2>
+        <a href="#" class="button new"> + Novo Curso</a>
+        <table id="table-content">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Descrição</th>
+              <th>Imagem</th>
+              <th>Professor</th>
+              <th>Aulas</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="table-id">1</td>
+              <td class="table-title">Java Script</td>
+              <td class="table-description">Tudo Sobre JS</td>
+              <td class="table-image">
+                <img src="./assets/plus.svg" alt="random image" />
+              </td>
+              <td class="table-teacher">Lucas</td>
+              <td class="table-classes">
+                Aula 1 Aula 2 Aula 3 Aula 4 Aula 5 Aula 6 Aula 7
+              </td>
+              <td class="table-edit">
+                <button>Edit</button>
+              </td>
+              <td class="table-remove">
+                <img src="./assets/minus.svg" alt="random image" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+    <footer>Lucas Brito - dev.Classes - HSM Coders</footer>
   </body>
 </html>
