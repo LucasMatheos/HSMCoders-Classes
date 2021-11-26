@@ -1,4 +1,7 @@
 /* ============== Globals ============== */
+:root {
+  --green: #2d4a22;
+}
 * {
   margin: 0;
   padding: 0;
@@ -18,11 +21,11 @@ button {
   cursor: pointer;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-::placeholder {
+.search-box::placeholder {
   color: white;
 }
 
@@ -42,7 +45,7 @@ a{
 
 header {
   color: white;
-  background-color: #2d4a22;
+  background-color: var(--green);
   padding: 2rem 0 8rem;
 
   display: flex;
@@ -63,15 +66,15 @@ header h1 {
   justify-content: center;
 
   margin-top: -6rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
-#search-box:hover > .input-group input {
+#search-box:hover > .input-group-search input {
   width: 12rem;
   padding: 0 0.5rem;
 }
 
-.input-group {
+.input-group-search {
   display: flex;
   align-items: center;
   padding: 1rem 1.5rem;
@@ -81,7 +84,7 @@ header h1 {
 
   background-color: #27ae5f00;
 }
-.input-group button {
+.input-group-search button {
   color: black;
   background-color: transparent;
   border: 3px groove white;
@@ -91,7 +94,7 @@ header h1 {
   border-radius: 50%;
 }
 
-.input-group input {
+.input-group-search input {
   color: white;
 
   padding: 0;
@@ -132,6 +135,7 @@ table thead tr th:last-child,
 table tbody tr td:last-child {
   border-radius: 0 0.25rem 0.25rem 0;
 }
+
 table tbody tr {
   opacity: 0.7;
 }
@@ -149,9 +153,111 @@ table tbody td {
   background: white;
   padding: 1rem 2rem;
 }
+.table-row {
+  height: 75px;
+}
+.table-row p {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  width: 200px;
+  overflow-y: auto;
+}
+.table-row .table-image img {
+  height: 100px;
+  width: 100px;
+}
 
-.table-id{
+.table-row .table-remove img {
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+.table-row .table-remove img:hover {
+  filter: brightness(0.8);
+}
+.table-row .table-edit button {
+  background-color: var(--green);
+  border: none;
+  color: white;
+  padding: 1rem 3rem;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1rem;
+  filter: brightness(1.8);
+  transition: all 0.2s;
+}
+.table-row .table-edit button:hover {
+  filter: brightness(1);
+}
+
+/* ================= MODAL ============ */
+.modal-overlay {
   width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.7);
+
+  position: fixed;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+  z-index: 999;
+}
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.modal {
+  background-color: #f0f2f5;
+  padding: 2.4rem;
+
+  position: relative;
+}
+
+/* =============== Form ============================= */
+#form {
+  max-width: 500px;
+}
+
+#form h2 {
+  margin-top: 0;
+}
+
+#form form input {
+  border: none;
+  border-radius: 0.2rem;
+
+  padding: 0.8rem;
+
+  width: 100%;
+}
+
+.input-group {
+  margin-top: 0.8rem;
+}
+
+.input-group small {
+  opacity: 0.4;
+}
+
+.input-group.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-group.actions .button,
+.input-group.actions button {
+  width: 48%;
+}
+
+.input-group.text-area input {
+  height: 75px;
 }
 /* ============== Footer ============== */
 footer {

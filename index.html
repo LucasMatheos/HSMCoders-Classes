@@ -26,7 +26,7 @@
     </header>
     <main class="container">
       <div id="search-box">
-        <div class="input-group">
+        <div class="input-group-search">
           <label class="sr-only" for="search">Buscar um curso por id</label>
           <input
             type="search"
@@ -41,7 +41,9 @@
       </div>
       <section id="table">
         <h2 class="sr-only">Tabela de Cursos</h2>
-        <a href="#" class="button new"> + Novo Curso</a>
+        <a href="#" class="button new" onclick="Modal.OpenCloseModal()">
+          <h4>+ Novo Curso</h4>
+        </a>
         <table id="table-content">
           <thead>
             <tr>
@@ -55,29 +57,78 @@
               <th></th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td class="table-id">1</td>
-              <td class="table-title">Java Script</td>
-              <td class="table-description">Tudo Sobre JS</td>
-              <td class="table-image">
-                <img src="./assets/plus.svg" alt="random image" />
-              </td>
-              <td class="table-teacher">Lucas</td>
-              <td class="table-classes">
-                Aula 1 Aula 2 Aula 3 Aula 4 Aula 5 Aula 6 Aula 7
-              </td>
-              <td class="table-edit">
-                <button>Edit</button>
-              </td>
-              <td class="table-remove">
-                <img src="./assets/minus.svg" alt="random image" />
-              </td>
-            </tr>
-          </tbody>
+          <tbody></tbody>
         </table>
       </section>
     </main>
+
+    <div class="modal-overlay">
+      <div class="modal">
+        <div id="form">
+          <h2>Mudar para novo curso ou Editar Curso</h2>
+          <form onsubmit="Form.submit(event)">
+            <div class="input-group">
+              <label class="sr-only" for="id">ID</label>
+              <input
+                type="number"
+                id="id"
+                name="id"
+                placeholder="ID"
+                step="1"
+              />
+            </div>
+            <div class="input-group">
+              <label class="sr-only" for="title">Título</label>
+              <input type="text" id="title" name="title" placeholder="Título" />
+            </div>
+            <div class="input-group text-area">
+              <label class="sr-only" for="description">Descrição</label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                placeholder="Descrição"
+              />
+            </div>
+            <div class="input-group">
+              <label class="sr-only" for="image">Caminho da imagem</label>
+              <input
+                type="text"
+                id="image"
+                name="image"
+                placeholder="Caminho da Imagem"
+              />
+            </div>
+            <div class="input-group">
+              <label class="sr-only" for="image">Professor(a)</label>
+              <input
+                type="text"
+                id="teacher"
+                name="teacher"
+                placeholder="Professor(a)"
+              />
+            </div>
+            <div class="input-group text-area">
+              <label class="sr-only" for="image">Aulas</label>
+              <input
+                type="text"
+                id="classes"
+                name="classes"
+                placeholder="Link das Aulas"
+              />
+            </div>
+
+            <div class="input-group actions">
+              <a href="#" onClick="Modal.OpenCloseModal()" class="button cancel"
+                >Cancelar</a
+              >
+              <button type="submit">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <footer>Lucas Brito - dev.Classes - HSM Coders</footer>
+    <script src="./script.js"></script>
   </body>
 </html>
