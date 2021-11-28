@@ -54,6 +54,16 @@ const DOM = {
   searchBox: document.querySelector("#search"),
   table: document.querySelector("#table-content tbody"),
   innerHTMLCourses(course, index) {
+    const classesArray = course.classes.trim().split(",");
+    const classesList = classesArray.map(
+      (classe, index) =>
+        `<li class="classe-content" ><a href="${classe}" target="_blank">Aula ${
+          index + 1
+        }</a></li>`
+    );
+    const classesHTML = `<ul class="classe-list">${classesList
+      .toString()
+      .replace(/\,/g, "")}</ul>`;
     const html = `<td>${course.id}</td>
     <td>${course.title}</td>
     <td class="table-description">
@@ -66,7 +76,7 @@ const DOM = {
     </td>
     <td >${course.teacher}</td>
     <td class="table-classes">
-    ${course.classes}
+    ${classesHTML}
     </td>
     <td class="table-edit">
       <button onclick="Modal.editCourse(${index})">Edit</button>
@@ -108,6 +118,14 @@ const DOM = {
   searchCourse() {
     const courseID = DOM.searchBox.value;
     const courseFinded = Courses.all.find((course) => course.id == courseID);
+    let position = 0;
+    if (!!courseFinded) {
+      position = Courses.all
+        .map((course) => {
+          return course.id;
+        })
+        .indexOf(courseID);
+    }
     try {
       if (!courseFinded) {
         throw new Error("Curso não existe");
@@ -115,12 +133,11 @@ const DOM = {
       if (courseID == "") {
         throw new Error("Digite um ID");
       }
+      Modal.editCourse(position);
+      DOM.searchBox.value = "";
     } catch (error) {
       alert(error.message);
     }
-    DOM.clearCourse();
-    DOM.addCourse(courseFinded, 0);
-    DOM.searchBox.value = "";
   },
 };
 
@@ -207,8 +224,8 @@ const Form = {
         course.title,
         course.description,
         course.image,
-        course.classes,
-        course.teacher
+        course.teacher,
+        course.classes
       );
       Form.clearFields();
       Form.id.removeAttribute("readonly");

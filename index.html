@@ -22,7 +22,7 @@
   </head>
   <body>
     <header>
-      <h1>dev.Classes</h1>
+      <h2>HSM Coders - Classes</h2>
     </header>
     <main class="container">
       <div id="search-box">
@@ -38,9 +38,6 @@
             <i class="fas fa-search fa-2x"></i>
           </button>
         </div>
-      </div>
-      <div class="clear-field">
-        <h5 onclick="App.reload()">Limpar Filtro</h5>
       </div>
       <section id="table">
         <h2 class="sr-only">Tabela de Cursos</h2>
@@ -112,14 +109,18 @@
               />
             </div>
             <div class="input-group text-area">
-              <label class="sr-only" for="image">Aulas</label>
-              <input
+              <label class="sr-only" for="classes">Aulas</label>
+               <input 
                 type="text"
                 id="classes"
                 name="classes"
-                placeholder="Link das Aulas"
-              />
+                placeholder="Link das Aulas"/>
+                
             </div>
+            <small class="help"
+            >Use , virgula " , "  para separar os links de cada aula</small
+          >
+        </div>
 
             <div class="input-group actions">
               <a href="#" onClick="Modal.OpenCloseModal()" class="button cancel"
@@ -135,3 +136,5 @@
     <script src="./script.js"></script>
   </body>
 </html>
+
+<a href=""></a>
