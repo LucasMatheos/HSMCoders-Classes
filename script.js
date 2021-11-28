@@ -3,6 +3,18 @@ const Modal = {
   OpenCloseModal() {
     Modal.modalBox.classList.toggle("active");
   },
+  newCourse() {
+    Form.modalName.innerHTML = "Novo Curso";
+    Form.clearFields();
+    Form.id.removeAttribute("readonly");
+    Modal.OpenCloseModal();
+  },
+  editCourse(index) {
+    Form.modalName.innerHTML = "Editar Curso";
+    Form.id.setAttribute("readonly", "true");
+    Form.getEditCourseValues(index);
+    Modal.OpenCloseModal();
+  },
 };
 
 const Storage = {
@@ -21,19 +33,25 @@ const Courses = {
     App.reload();
   },
   remove(index) {
-    console.log(index);
     Courses.all.splice(index, 1);
     App.reload();
   },
-  edit(index) {
-    const allCourses = [...Courses.all];
-    console.log(allCourses);
-    allCourses[0].id = 1324232;
-    console.log(Courses.all);
+  edit(index, newTitle, newDescription, newImage, newTeacher, newClasses) {
+    let editCourse = Courses.all[index];
+    editCourse.title = newTitle;
+    editCourse.description = newDescription;
+    editCourse.image = newImage;
+    editCourse.teacher = newTeacher;
+    editCourse.classes = newClasses;
+    App.reload();
+  },
+  search() {
+    DOM.searchCourse();
   },
 };
 
 const DOM = {
+  searchBox: document.querySelector("#search"),
   table: document.querySelector("#table-content tbody"),
   innerHTMLCourses(course, index) {
     const html = `<td>${course.id}</td>
@@ -51,7 +69,7 @@ const DOM = {
     ${course.classes}
     </td>
     <td class="table-edit">
-      <button onclick="Courses.edit(${index})">Edit</button>
+      <button onclick="Modal.editCourse(${index})">Edit</button>
     </td>
     <td class="table-remove">
       <img onclick="Courses.remove(${index})" src="./assets/minus.svg" alt="random image" />
@@ -69,6 +87,41 @@ const DOM = {
   clearCourse() {
     DOM.table.innerHTML = "";
   },
+  editCourse(index) {
+    let AllCourses = [...Courses.all];
+    let idOld = AllCourses[index].id;
+    let titleOld = AllCourses[index].title;
+    let descriptionOld = AllCourses[index].description;
+    let imageOld = AllCourses[index].image;
+    let teacherOld = AllCourses[index].teacher;
+    let classesOld = AllCourses[index].classes;
+
+    return {
+      idOld,
+      titleOld,
+      descriptionOld,
+      imageOld,
+      teacherOld,
+      classesOld,
+    };
+  },
+  searchCourse() {
+    const courseID = DOM.searchBox.value;
+    const courseFinded = Courses.all.find((course) => course.id == courseID);
+    try {
+      if (!courseFinded) {
+        throw new Error("Curso não existe");
+      }
+      if (courseID == "") {
+        throw new Error("Digite um ID");
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+    DOM.clearCourse();
+    DOM.addCourse(courseFinded, 0);
+    DOM.searchBox.value = "";
+  },
 };
 
 const Form = {
@@ -78,7 +131,8 @@ const Form = {
   image: document.querySelector("input#image"),
   teacher: document.querySelector("input#teacher"),
   classes: document.querySelector("input#classes"),
-
+  modalName: document.querySelector("#form-name"),
+  position: 0,
   getValues() {
     return {
       id: Form.id.value,
@@ -89,12 +143,21 @@ const Form = {
       classes: Form.classes.value,
     };
   },
+  getEditCourseValues(index) {
+    Form.id.value = DOM.editCourse(index).idOld;
+    Form.title.value = DOM.editCourse(index).titleOld;
+    Form.description.value = DOM.editCourse(index).descriptionOld;
+    Form.image.value = DOM.editCourse(index).imageOld;
+    Form.teacher.value = DOM.editCourse(index).teacherOld;
+    Form.classes.value = DOM.editCourse(index).classesOld;
+    Form.position = index;
+  },
 
   validateFields() {
     const { id, title, description, image, teacher, classes } =
       Form.getValues();
     const searchID = Courses.all.find((course) => course.id == id);
-    console.log(searchID);
+
     if (
       id === "" ||
       title === "" ||
@@ -105,7 +168,7 @@ const Form = {
     ) {
       throw new Error("Por favor, preencha todos os campos");
     }
-    if (!!searchID) {
+    if (!!searchID && !Form.id.getAttribute("readonly")) {
       throw new Error("ID do repetido, por favor insira outro");
     }
   },
@@ -119,9 +182,11 @@ const Form = {
     Form.image.value = "";
     Form.classes.value = "";
     Form.teacher.value = "";
+    Form.position = "";
   },
-  submit(event) {
+  submitNew(event) {
     event.preventDefault();
+
     try {
       Form.validateFields();
       const course = Form.getValues();
@@ -130,6 +195,34 @@ const Form = {
       Modal.OpenCloseModal();
     } catch (error) {
       alert(error.message);
+    }
+  },
+  submitEdit(event) {
+    event.preventDefault();
+    try {
+      Form.validateFields();
+      const course = Form.getValues();
+      Courses.edit(
+        Form.position,
+        course.title,
+        course.description,
+        course.image,
+        course.classes,
+        course.teacher
+      );
+      Form.clearFields();
+      Form.id.removeAttribute("readonly");
+      Modal.OpenCloseModal();
+    } catch (error) {
+      alert(error.message);
+    }
+  },
+  submit(event) {
+    if (Form.modalName.innerHTML == "Novo Curso") {
+      return Form.submitNew(event);
+    }
+    if (Form.modalName.innerHTML == "Editar Curso") {
+      return Form.submitEdit(event);
     }
   },
 };

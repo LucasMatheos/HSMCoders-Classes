@@ -34,14 +34,17 @@
             name="search"
             id="search"
           />
-          <button>
+          <button onclick="Courses.search()">
             <i class="fas fa-search fa-2x"></i>
           </button>
         </div>
       </div>
+      <div class="clear-field">
+        <h5 onclick="App.reload()">Limpar Filtro</h5>
+      </div>
       <section id="table">
         <h2 class="sr-only">Tabela de Cursos</h2>
-        <a href="#" class="button new" onclick="Modal.OpenCloseModal()">
+        <a href="#" class="button new" onclick="Modal.newCourse()">
           <h4>+ Novo Curso</h4>
         </a>
         <table id="table-content">
@@ -65,7 +68,7 @@
     <div class="modal-overlay">
       <div class="modal">
         <div id="form">
-          <h2>Mudar para novo curso ou Editar Curso</h2>
+          <h2 id="form-name">Novo Curso</h2>
           <form onsubmit="Form.submit(event)">
             <div class="input-group">
               <label class="sr-only" for="id">ID</label>

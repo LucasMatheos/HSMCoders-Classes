@@ -65,8 +65,8 @@ header h1 {
   align-items: center;
   justify-content: center;
 
-  margin-top: -6rem;
-  margin-bottom: 2.5rem;
+  margin-top: -7rem;
+  margin-bottom: 0.75rem;
 }
 
 #search-box:hover > .input-group-search input {
@@ -112,6 +112,23 @@ header h1 {
   font-weight: 500;
   transition: 0.5s;
   line-height: 2rem;
+}
+/* ============== Clear Field ============== */
+.clear-field {
+  display: block;
+  color: white;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.clear-field h5 {
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+.clear-field h5:hover {
+  filter: brightness(0.8);
 }
 
 /* ============== Table ============== */
@@ -221,7 +238,7 @@ table tbody td {
 
 /* =============== Form ============================= */
 #form {
-  max-width: 500px;
+  width: 500px;
 }
 
 #form h2 {
