@@ -1,6 +1,6 @@
 # HSMCoders-Classes
 <br>
-HSM Coders - Classes é um aplicação da conclusão do cuurso HSM Coders - Desenvolvimento Full Stack. Plataforma focada na gestão de cursos educacionais, desenvolvida com HTML, CSS e JavaScript. Os cursos são dispostos em uma tabela com as seguintes informações:<br>
+HSM Coders - Classes é um aplicação da conclusão do cuurso HSM Coders - Desenvolvimento Full Stack. Plataforma focada na gestão de cursos educacionais, desenvolvida com HTML, CSS e JavaScript. Os cursos são dispostos em uma tabela com as seguintes informações:<br><br>
 
 * Id (número identificador)<br>
 * Título<br>
